@@ -12,6 +12,12 @@ function Inicio() {
         <button>Añadir turno</button>
         <div>
           <Dia nombre={"lunes"} />
+          <Dia nombre={"martes"} />
+          <Dia nombre={"miércoles"} />
+          <Dia nombre={"jueves"} />
+          <Dia nombre={"viernes"} />
+          <Dia nombre={"sábado"} />
+          <Dia nombre={"domingo"} />
         </div>
       </article>
     </section>

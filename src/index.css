@@ -1,0 +1,161 @@
+:root {
+  font-family: "Segoe UI", sans-serif;
+  color: #202a35;
+  background: #f4f7f5;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  font-optical-sizing: auto;
+  font-weight: 400;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  margin: 0;
+}
+
+button {
+  border: 0;
+  border-radius: 8px;
+  padding: 9px 14px;
+  font: inherit;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background-color 160ms ease,
+    color 160ms ease,
+    transform 160ms ease;
+}
+
+button:focus-visible {
+  outline: 3px solid #a8d8c1;
+  outline-offset: 2px;
+}
+
+#root > section {
+  width: min(100% - 40px, 1440px);
+  margin: 0 auto;
+  padding: 56px 0;
+}
+
+#root > section > article:first-child {
+  margin-bottom: 40px;
+}
+
+#root > section > article:first-child h1 {
+  margin: 0;
+  color: #203a31;
+  font-size: clamp(2rem, 5vw, 3rem);
+  letter-spacing: -0.06em;
+}
+
+#root > section > article:first-child p {
+  margin: 8px 0 0;
+  color: #75827c;
+  font-size: 1.05rem;
+}
+
+#root > section > article:nth-child(2) > h2 {
+  display: inline-block;
+  margin: 0 18px 20px 0;
+  font-size: 1.35rem;
+  letter-spacing: -0.03em;
+}
+
+#root > section > article:nth-child(2) > button {
+  background: #287854;
+  color: #fff;
+}
+
+#root > section > article:nth-child(2) > button:hover {
+  background: #1e6344;
+  transform: translateY(-1px);
+}
+
+#root > section > article:nth-child(2) > div {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(150px, 1fr));
+  gap: 12px;
+  overflow-x: auto;
+  padding: 4px 2px 14px;
+}
+
+#root > section > article:nth-child(2) > div > article {
+  min-height: 190px;
+  padding: 16px;
+  border: 1px solid #e5ebe7;
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: 0 3px 12px rgb(32 58 49 / 4%);
+}
+
+#root > section > article:nth-child(2) > div > article > h3 {
+  margin: 0 0 16px;
+  color: #53635b;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: capitalize;
+}
+
+.turno {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 12px;
+  border: 1px solid #d7ebdf;
+  border-radius: 10px;
+  background: #f1f8f3;
+}
+
+.turno > div {
+  min-width: 100%;
+}
+
+.turno strong {
+  color: #287854;
+  font-size: 0.82rem;
+}
+
+.turno p {
+  margin: 5px 0 0;
+  color: #53635b;
+  font-size: 0.82rem;
+}
+
+.turno button {
+  padding: 6px 8px;
+  background: transparent;
+  color: #53635b;
+  font-size: 0.75rem;
+}
+
+.turno button:hover {
+  background: #e1eee5;
+  color: #203a31;
+}
+
+@media (max-width: 600px) {
+  #root > section {
+    width: min(100% - 28px, 1440px);
+    padding: 36px 0;
+  }
+
+  #root > section > article:first-child {
+    margin-bottom: 30px;
+  }
+
+  #root > section > article:nth-child(2) > div {
+    grid-template-columns: repeat(7, minmax(138px, 1fr));
+  }
+}

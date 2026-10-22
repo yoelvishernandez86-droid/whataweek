@@ -1,21 +1,35 @@
-type Dia = {
+import Turno from "./turno";
+import { turnos } from "../turnos/turnos";
+export type Dia = {
   nombre: DiasDeSemana;
 };
 
-type DiasDeSemana =
+export type DiasDeSemana =
   | "lunes"
   | "martes"
-  | "miercoles"
+  | "miércoles"
   | "jueves"
   | "viernes"
-  | "sabado"
+  | "sábado"
   | "domingo";
 
 function Dia(diaSemana: Dia) {
+  const editarTurno = () => {};
+  const eliminarTurno = () => {};
+
   return (
     <article>
       <h3>{diaSemana.nombre}</h3>
-      <p>Sin turnos</p>
+      {turnos
+        .filter((turno) => turno.dia === diaSemana.nombre)
+        .map((turno) => (
+          <Turno
+            key={turno.id}
+            turno={turno}
+            onEditar={editarTurno}
+            onEliminar={eliminarTurno}
+          />
+        ))}
     </article>
   );
 }
