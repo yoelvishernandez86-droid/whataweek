@@ -7,6 +7,7 @@ function Inicio() {
         <h1>Whataweek</h1>
         <p>Tu semana, a tu ritmo</p>
       </article>
+      <article></article>
       <article>
         <h2>Mi semana</h2>
         <button>Añadir turno</button>

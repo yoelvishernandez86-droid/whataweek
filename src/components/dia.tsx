@@ -1,5 +1,6 @@
-import Turno from "./turno";
+import Turno, { type TurnoDatos } from "./turno";
 import { turnos } from "../turnos/turnos";
+import { useState } from "react";
 export type Dia = {
   nombre: DiasDeSemana;
 };
@@ -14,22 +15,39 @@ export type DiasDeSemana =
   | "domingo";
 
 function Dia(diaSemana: Dia) {
+  const [turnosImp, setTurnosImp] = useState(turnos);
+  const [modal, setModal] = useState(false);
   const editarTurno = () => {};
-  const eliminarTurno = () => {};
+  const eliminarTurno = (id: string) => {
+    setTurnosImp((valoresAnteriores) =>
+      valoresAnteriores.filter((valor) => {
+        valor.id !== id;
+      }),
+    );
+  };
+
+  const ordenarTurnoSemana = (turnosImp: TurnoDatos[]) => {
+    let turnoCoincidente = turnosImp.filter(
+      (turno) => turno.dia === diaSemana.nombre,
+    );
+    if (turnoCoincidente.length !== 0) {
+      return turnoCoincidente.map((turno) => (
+        <Turno
+          key={turno.id}
+          turno={turno}
+          onEditar={editarTurno}
+          onEliminar={eliminarTurno}
+        />
+      ));
+    } else {
+      return <h3>Sin turnos</h3>;
+    }
+  };
 
   return (
     <article>
       <h3>{diaSemana.nombre}</h3>
-      {turnos
-        .filter((turno) => turno.dia === diaSemana.nombre)
-        .map((turno) => (
-          <Turno
-            key={turno.id}
-            turno={turno}
-            onEditar={editarTurno}
-            onEliminar={eliminarTurno}
-          />
-        ))}
+      {ordenarTurnoSemana(turnosImp)}
     </article>
   );
 }

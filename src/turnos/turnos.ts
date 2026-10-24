@@ -37,10 +37,4 @@ export const turnos: TurnoDatos[] = [
     entrada: "10:00",
     salida: "18:00",
   },
-  {
-    id: "7",
-    dia: "domingo",
-    entrada: "16:00",
-    salida: "00:00",
-  },
 ];
