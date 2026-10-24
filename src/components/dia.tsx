@@ -17,7 +17,13 @@ export type DiasDeSemana =
 function Dia(diaSemana: Dia) {
   const [turnosImp, setTurnosImp] = useState(turnos);
   const [modal, setModal] = useState(false);
-  const editarTurno = () => {};
+  const guardarTurno = (turnoEditado: TurnoDatos) => {
+    setTurnosImp((anteriores) =>
+      anteriores.map((turno) =>
+        turno.id === turnoEditado.id ? turnoEditado : turno
+      )
+    );
+  };
   const eliminarTurno = (id: string) => {
     setTurnosImp((valoresAnteriores) =>
       valoresAnteriores.filter((valor) => {

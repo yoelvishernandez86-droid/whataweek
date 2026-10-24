@@ -1,5 +1,6 @@
 import Dia from "../components/dia";
-
+import ModalModificar from "../components/modalModificar";
+import type { TurnoDatos } from "../components/turno";
 function Inicio() {
   return (
     <section>
@@ -7,7 +8,7 @@ function Inicio() {
         <h1>Whataweek</h1>
         <p>Tu semana, a tu ritmo</p>
       </article>
-      <article></article>
+      
       <article>
         <h2>Mi semana</h2>
         <button>Añadir turno</button>

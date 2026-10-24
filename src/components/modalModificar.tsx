@@ -17,7 +17,7 @@ type Props = {
   onCancelar: () => void;
 };
 
-function FormularioTurno({ turno, onGuardar, onCancelar }: Props) {
+function ModalModificar({ turno, onGuardar, onCancelar }: Props) {
   const [dia, setDia] = useState(turno.dia);
   const [entrada, setEntrada] = useState(turno.entrada);
   const [salida, setSalida] = useState(turno.salida);
@@ -79,4 +79,4 @@ function FormularioTurno({ turno, onGuardar, onCancelar }: Props) {
   );
 }
 
-export default FormularioTurno;
+export default ModalModificar;
