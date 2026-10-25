@@ -1,8 +1,12 @@
 import Turno, { type TurnoDatos } from "./turno";
-import { turnos } from "../turnos/turnos";
 import { useState } from "react";
-export type Dia = {
+import ModalModificar from "./modalModificar";
+
+type DiaProps = {
   nombre: DiasDeSemana;
+  turnos: TurnoDatos[];
+  onGuardar: (turno: TurnoDatos) => void;
+  onEliminar: (id: string) => void;
 };
 
 export type DiasDeSemana =
@@ -14,35 +18,21 @@ export type DiasDeSemana =
   | "sábado"
   | "domingo";
 
-function Dia(diaSemana: Dia) {
-  const [turnosImp, setTurnosImp] = useState(turnos);
-  const [modal, setModal] = useState(false);
-  const guardarTurno = (turnoEditado: TurnoDatos) => {
-    setTurnosImp((anteriores) =>
-      anteriores.map((turno) =>
-        turno.id === turnoEditado.id ? turnoEditado : turno
-      )
-    );
-  };
-  const eliminarTurno = (id: string) => {
-    setTurnosImp((valoresAnteriores) =>
-      valoresAnteriores.filter((valor) => {
-        valor.id !== id;
-      }),
-    );
-  };
+function Dia({ nombre, turnos, onGuardar, onEliminar }: DiaProps) {
+  const [turnoEnEdicion, setTurnoEnEdicion] = useState<TurnoDatos | null>(null);
 
-  const ordenarTurnoSemana = (turnosImp: TurnoDatos[]) => {
-    let turnoCoincidente = turnosImp.filter(
-      (turno) => turno.dia === diaSemana.nombre,
+  const ordenarTurnoSemana = () => {
+    const turnoCoincidente = turnos.filter(
+      (turno) => turno.dia === nombre
     );
+
     if (turnoCoincidente.length !== 0) {
       return turnoCoincidente.map((turno) => (
         <Turno
           key={turno.id}
           turno={turno}
-          onEditar={editarTurno}
-          onEliminar={eliminarTurno}
+          onEditar={setTurnoEnEdicion}
+          onEliminar={onEliminar}
         />
       ));
     } else {
@@ -52,8 +42,18 @@ function Dia(diaSemana: Dia) {
 
   return (
     <article>
-      <h3>{diaSemana.nombre}</h3>
-      {ordenarTurnoSemana(turnosImp)}
+      {turnoEnEdicion && (
+        <ModalModificar
+          turno={turnoEnEdicion}
+          onGuardar={(turno) => {
+            onGuardar(turno);
+            setTurnoEnEdicion(null);
+          }}
+          onCancelar={() => setTurnoEnEdicion(null)}
+        />
+      )}
+      <h3>{nombre}</h3>
+      {ordenarTurnoSemana()}
     </article>
   );
 }
