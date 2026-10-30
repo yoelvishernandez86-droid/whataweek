@@ -96,7 +96,7 @@ function Inicio() {
           ))}
         </div>
       </article>
-      <PanelDeIa />
+      <PanelDeIa turnos={turnos} />
     </section>
   );
 }
