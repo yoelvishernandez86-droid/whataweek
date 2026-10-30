@@ -5,6 +5,9 @@ export type TurnoDatos = {
   dia: DiasDeSemana;
   entrada: string;
   salida: string;
+  nombreActividad: string;
+  esActividad?: boolean;
+  color?: string;
 };
 
 type TurnoProps = {
@@ -15,11 +18,23 @@ type TurnoProps = {
 
 export function Turno({ turno, onEditar, onEliminar }: TurnoProps) {
   const esNocturno = turno.salida < turno.entrada;
+  const estiloActividad =
+    turno.esActividad && turno.color
+      ? {
+          borderColor: turno.color,
+          backgroundColor: `${turno.color}1A`,
+        }
+      : undefined;
 
   return (
-    <article className="turno">
+    <article
+      className={`turno${turno.esActividad ? " turno-actividad" : ""}`}
+      style={estiloActividad}
+    >
       <div>
-        <strong>Trabajo</strong>
+        <strong style={turno.esActividad ? { color: turno.color } : undefined}>
+          {turno.esActividad ? turno.nombreActividad : "Trabajo"}
+        </strong>
         <p>
           {turno.entrada} - {turno.salida}
           {esNocturno && " (+1 día)"}

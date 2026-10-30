@@ -7,6 +7,7 @@ type DiaProps = {
   turnos: TurnoDatos[];
   onGuardar: (turno: TurnoDatos) => void;
   onEliminar: (id: string) => void;
+  nombreActividad?: string;
 };
 
 export type DiasDeSemana =
@@ -22,9 +23,9 @@ function Dia({ nombre, turnos, onGuardar, onEliminar }: DiaProps) {
   const [turnoEnEdicion, setTurnoEnEdicion] = useState<TurnoDatos | null>(null);
 
   const ordenarTurnoSemana = () => {
-    const turnoCoincidente = turnos.filter(
-      (turno) => turno.dia === nombre
-    );
+    const turnoCoincidente = turnos
+      .filter((turno) => turno.dia === nombre)
+      .sort((a, b) => a.entrada.localeCompare(b.entrada));
 
     if (turnoCoincidente.length !== 0) {
       return turnoCoincidente.map((turno) => (
