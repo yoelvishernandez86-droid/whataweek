@@ -1,16 +1,39 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import type { TurnoDatos } from "./turno";
 type PanelDeIaProps = {
   turnos: TurnoDatos[];
 };
 
 function PanelDeIa({ turnos }: PanelDeIaProps) {
-  const [peticionIa, setPeticionIA] = useState("");
-  const generarPropuesta = () => {
-    console.log({
-      peticionIa,
-      turnos,
-    });
+  const [peticionIa, setPeticionIA] = useState(() => {
+    return localStorage.getItem("peticionIa") ?? "";
+  });
+
+  useEffect(() => {
+    localStorage.setItem("peticionIa", peticionIa);
+  }, [peticionIa]);
+  const generarPropuesta = async () => {
+    try {
+      const respuesta = await fetch("/api/propuesta", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          peticionIa,
+          turnos,
+        }),
+      });
+
+      if (!respuesta.ok) {
+        throw new Error("El servidor no respondió correctamente");
+      }
+
+      const datos = await respuesta.json();
+      console.log(datos);
+    } catch (error) {
+      console.error("Error al conectar con el servidor:", error);
+    }
   };
   return (
     <section>
