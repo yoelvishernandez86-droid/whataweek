@@ -8,6 +8,7 @@ function PanelDeIa({ turnos }: PanelDeIaProps) {
   const [peticionIa, setPeticionIA] = useState(() => {
     return localStorage.getItem("peticionIa") ?? "";
   });
+  const [propuesta, setPropuesta] = useState("");
 
   useEffect(() => {
     localStorage.setItem("peticionIa", peticionIa);
@@ -30,6 +31,7 @@ function PanelDeIa({ turnos }: PanelDeIaProps) {
       }
 
       const datos = await respuesta.json();
+      setPropuesta(datos.propuesta);
       console.log(datos);
     } catch (error) {
       console.error("Error al conectar con el servidor:", error);
@@ -48,11 +50,7 @@ function PanelDeIa({ turnos }: PanelDeIaProps) {
           value={peticionIa}
           onChange={(e) => setPeticionIA(e.target.value)}
         />
-        <ul>
-          <li>modificarPropuesta1</li>
-          <li>modificarPropuesta2</li>
-          <li>modificarPropuesta3</li>
-        </ul>
+
         <button
           onClick={() => generarPropuesta()}
           disabled={!peticionIa.trim()}
@@ -60,17 +58,12 @@ function PanelDeIa({ turnos }: PanelDeIaProps) {
           Generar propuesta
         </button>
       </div>
-      <div>
-        <h4>Una semana más equilibrada</h4>
-        <p>He encontrado huecos para tus objetivos sin cambiar tus turnos</p>
-        <ul>
-          <li>4h de estudio</li>
-          <li>3 entrenamientos</li>
-          <li>Domingo libre</li>
-        </ul>
-        <button>Aplicar propuesta</button>
-        <button>Ajustar</button>
-      </div>
+      {propuesta && (
+        <div>
+          <h4>Tu propuesta</h4>
+          <p style={{ whiteSpace: "pre-wrap" }}>{propuesta}</p>
+        </div>
+      )}
     </section>
   );
 }
